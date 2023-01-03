@@ -9,13 +9,13 @@ architecture bench of divider_tb is
 
   component divider
       Port ( clk: in STD_LOGIC;
-             reset: in STD_LOGIC;
-             enable : out STD_LOGIC);
+             reset: in STD_LOGIC := '0';
+             enable : out STD_LOGIC := '0');
   end component;
 
   signal clk: STD_LOGIC;
-  signal reset: STD_LOGIC;
-  signal enable: STD_LOGIC;
+  signal reset: STD_LOGIC := '0';
+  signal enable: STD_LOGIC := '0';
 
   constant clock_period: time := 10 ns;
   signal stop_the_clock: boolean;

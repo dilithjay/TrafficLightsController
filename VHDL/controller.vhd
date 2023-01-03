@@ -111,7 +111,6 @@ signal expired: STD_LOGIC;
 signal enable: STD_LOGIC;
 signal interval: STD_LOGIC_VECTOR (1 downto 0);
 signal tp_val: STD_LOGIC_VECTOR (3 downto 0);
---signal leds_o: STD_LOGIC_VECTOR (6 downto 0);
 
 begin
 

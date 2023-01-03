@@ -32,11 +32,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity fsm is
-    Port ( wr : in STD_LOGIC;
-           sensor_sync : in STD_LOGIC;
-           prog_sync : in STD_LOGIC;
-           expired : in STD_LOGIC;
-           reset_sync: in STD_LOGIC;
+    Port ( wr : in STD_LOGIC := '0';
+           sensor_sync : in STD_LOGIC := '0';
+           prog_sync : in STD_LOGIC := '0';
+           expired : in STD_LOGIC := '0';
+           reset_sync: in STD_LOGIC := '0';
            clk: in STD_LOGIC;
            leds : out STD_LOGIC_VECTOR (6 downto 0) := "1000010";
            interval : out STD_LOGIC_VECTOR (1 downto 0) := "00";
@@ -58,9 +58,10 @@ begin
           start_t <= '1';
           wr_reset <= '0';
         END IF;
-    
+                  
+        start_t <= '0';
         IF expired = '1' THEN
-          start_t <= '0';
+          start_t <= '1';
           
           CASE state IS
             WHEN A =>
@@ -81,6 +82,7 @@ begin
               IF wr = '1' THEN
                 leds <= "0010011";
                 interval <= "01";
+                wr_reset <= '1';
                 state <= D;
               -- Else turn on Side street Green light
               ELSE
@@ -92,13 +94,12 @@ begin
               -- Turn on Side street Green light once walk period is over
               leds <= "0011000";
               interval <= "00";
-              wr_reset <= '1';
+              wr_reset <= '0';
               state <= E;
             WHEN E =>
               -- Switch Side street light from Green to Yellow
               leds <= "0010100";
               interval <= "10";
-              wr_reset <= '0';
               state <= F;
             WHEN F =>
               -- Switch Side street light from Yellow to Green

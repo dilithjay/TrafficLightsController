@@ -32,8 +32,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity walk_register is
-    Port ( wr_sync : in STD_LOGIC;
-           wr_reset : in STD_LOGIC;
+    Port ( wr_sync : in STD_LOGIC := '0';
+           wr_reset : in STD_LOGIC := '0';
            wr : out STD_LOGIC := '0');
 end walk_register;
 

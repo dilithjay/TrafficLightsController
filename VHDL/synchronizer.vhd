@@ -32,15 +32,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity synchronizer is
-    Port ( reset : in STD_LOGIC;
-           sensor : in STD_LOGIC;
-           walk : in STD_LOGIC;
-           reprogram : in STD_LOGIC;
+    Port ( reset : in STD_LOGIC := '0';
+           sensor : in STD_LOGIC := '0';
+           walk : in STD_LOGIC := '0';
+           reprogram : in STD_LOGIC := '0';
            clk: in STD_LOGIC;
-           reset_sync : out STD_LOGIC;
-           sensor_sync : out STD_LOGIC;
-           wr_sync : out STD_LOGIC;
-           prog_sync : out STD_LOGIC);
+           reset_sync : out STD_LOGIC := '0';
+           sensor_sync : out STD_LOGIC := '0';
+           wr_sync : out STD_LOGIC := '0';
+           prog_sync : out STD_LOGIC := '0');
 end synchronizer;
 
 architecture Behavioral of synchronizer is

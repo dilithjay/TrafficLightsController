@@ -32,13 +32,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity time_parameters is
-    Port ( tp_sel : in STD_LOGIC_VECTOR (1 downto 0);
-           t_val : in STD_LOGIC_VECTOR (3 downto 0);
-           prog_sync : in STD_LOGIC;
-           reset : in STD_LOGIC;
+    Port ( tp_sel : in STD_LOGIC_VECTOR (1 downto 0) := "00";
+           t_val : in STD_LOGIC_VECTOR (3 downto 0) := "0110";
+           prog_sync : in STD_LOGIC := '0';
+           reset : in STD_LOGIC := '0';
            clk: in STD_LOGIC;
            interval : in STD_LOGIC_VECTOR (1 downto 0) := "00";
-           tp_val : out STD_LOGIC_VECTOR (3 downto 0));
+           tp_val : out STD_LOGIC_VECTOR (3 downto 0) := "0110");
 end time_parameters;
 
 architecture Behavioral of time_parameters is

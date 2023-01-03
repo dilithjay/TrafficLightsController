@@ -28,7 +28,7 @@ architecture bench of controller_tb is
   signal leds: STD_LOGIC_VECTOR (6 downto 0);
   constant clock_period: time := 10 ns;
   signal stop_the_clock: boolean;
-  
+
 begin
 
   uut: controller port map ( reset     => reset,
@@ -46,7 +46,12 @@ begin
     walk <= '1';
     wait for 50 ns;
     walk <= '0';
+    wait for 2000 ns;
+    walk <= '1';
+    wait for 50 ns;
+    walk <= '0';
     wait for 200 ns;
+    sensor <= '1';
     wait;
   end process;
 

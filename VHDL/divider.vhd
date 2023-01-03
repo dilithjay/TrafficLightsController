@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 12/24/2022 09:05:47 PM
+-- Create Date: 12/23/2022 07:42:03 PM
 -- Design Name: 
--- Module Name: time_parameters_tb - Behavioral
+-- Module Name: divider - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,13 +31,32 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity time_parameters_tb is
---  Port ( );
-end time_parameters_tb;
+entity divider is
+    Port ( clk: in STD_LOGIC;
+           reset: in STD_LOGIC := '0';
+           enable : out STD_LOGIC := '0');
+end divider;
 
-architecture Behavioral of time_parameters_tb is
+architecture Behavioral of divider is
 
+    signal count: integer := 1;
+    signal tmp : std_logic := '0';
+  
 begin
-
+  
+    PROCESS(clk, reset, tmp)
+    begin
+        IF(reset = '1') THEN
+            count <= 1;
+            tmp <= '0';
+        ELSIF(clk'event and clk='1') THEN
+            count <= count + 1;
+            IF (count = 49_999_999) THEN
+                tmp <= NOT tmp;
+                count <= 1;
+            end IF;
+        end IF;
+        enable <= tmp;
+    end PROCESS;
 
 end Behavioral;

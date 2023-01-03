@@ -33,45 +33,53 @@ USE IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity timer is
-    Port ( tp_val : in STD_LOGIC_VECTOR (3 downto 0);
-           enable : in STD_LOGIC:= '0';
+    Port ( tp_val : in STD_LOGIC_VECTOR (3 downto 0) := "0110";
+           enable : in STD_LOGIC := '0';
            start_t : in STD_LOGIC := '1';
-           reset_sync: in STD_LOGIC;
+           reset_sync: in STD_LOGIC := '0';
            clk: in STD_LOGIC;
            expired : out STD_LOGIC := '0');
 end timer;
 
 architecture Behavioral of timer is
 
-    signal count: integer := 1;
+    signal count: integer := 0;
     signal change: STD_LOGIC := '1';
+    signal restart_timer: STD_LOGIC := '0';
+    signal enable_checked: STD_LOGIC := '0';
 
 begin
 
     PROCESS (clk)
     begin
         IF rising_edge(clk) THEN
-            IF reset_sync = '1' THEN
-                change <= '0';
-            END IF;
-            
-            IF start_t = '1' THEN
-                change <= '0';
+            IF reset_sync = '1' OR start_t = '1' THEN
+                IF restart_timer = '0' THEN
+                    change <= '0';
+                    restart_timer <= '1';
+                END IF;
+            ELSE
+                restart_timer <= '0';
             END IF;
             
             IF change = '0' THEN
-                count <= to_integer(signed(tp_val));
+                count <= to_integer(unsigned(tp_val));
                 change <= '1';
             END IF;
             
             expired <= '0';
-            
             IF enable = '1' THEN
-                IF count = 1 THEN
-                    expired <= '1';
-                ELSE
-                    count <= count - 1;
+                IF enable_checked = '0' THEN
+                    IF count = 1 THEN
+                        expired <= '1';
+                    END IF;
+                    IF count > 0 THEN
+                        count <= count - 1;
+                    END IF;
+                    enable_checked <= '1';
                 END IF;
+            ELSE
+                enable_checked <= '0';
             END IF;
         END IF;
     END PROCESS;

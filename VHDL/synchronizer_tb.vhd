@@ -8,26 +8,26 @@ end;
 architecture bench of synchronizer_tb is
 
   component synchronizer
-      Port ( reset : in STD_LOGIC;
-             sensor : in STD_LOGIC;
-             walk : in STD_LOGIC;
-             reprogram : in STD_LOGIC;
+      Port ( reset : in STD_LOGIC := '0';
+             sensor : in STD_LOGIC := '0';
+             walk : in STD_LOGIC := '0';
+             reprogram : in STD_LOGIC := '0';
              clk: in STD_LOGIC;
-             reset_sync : out STD_LOGIC;
-             sensor_sync : out STD_LOGIC;
-             wr_sync : out STD_LOGIC;
-             prog_sync : out STD_LOGIC);
+             reset_sync : out STD_LOGIC := '0';
+             sensor_sync : out STD_LOGIC := '0';
+             wr_sync : out STD_LOGIC := '0';
+             prog_sync : out STD_LOGIC := '0');
   end component;
 
-  signal reset: STD_LOGIC;
-  signal sensor: STD_LOGIC;
-  signal walk: STD_LOGIC;
-  signal reprogram: STD_LOGIC;
+  signal reset: STD_LOGIC := '0';
+  signal sensor: STD_LOGIC := '0';
+  signal walk: STD_LOGIC := '0';
+  signal reprogram: STD_LOGIC := '0';
   signal clk: STD_LOGIC;
-  signal reset_sync: STD_LOGIC;
-  signal sensor_sync: STD_LOGIC;
-  signal wr_sync: STD_LOGIC;
-  signal prog_sync: STD_LOGIC;
+  signal reset_sync: STD_LOGIC := '0';
+  signal sensor_sync: STD_LOGIC := '0';
+  signal wr_sync: STD_LOGIC := '0';
+  signal prog_sync: STD_LOGIC := '0';
 
   constant clock_period: time := 10 ns;
   signal stop_the_clock: boolean;

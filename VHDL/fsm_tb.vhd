@@ -9,11 +9,11 @@ end;
 architecture bench of fsm_tb is
 
   component fsm
-      Port ( wr : in STD_LOGIC;
-             sensor_sync : in STD_LOGIC;
-             prog_sync : in STD_LOGIC;
-             expired : in STD_LOGIC;
-             reset_sync: in STD_LOGIC;
+      Port ( wr : in STD_LOGIC := '0';
+             sensor_sync : in STD_LOGIC := '0';
+             prog_sync : in STD_LOGIC := '0';
+             expired : in STD_LOGIC := '0';
+             reset_sync: in STD_LOGIC := '0';
              clk: in STD_LOGIC;
              leds : out STD_LOGIC_VECTOR (6 downto 0) := "1000010";
              interval : out STD_LOGIC_VECTOR (1 downto 0) := "00";
@@ -21,11 +21,11 @@ architecture bench of fsm_tb is
              wr_reset : out STD_LOGIC := '0');
   end component;
 
-  signal wr: STD_LOGIC;
-  signal sensor_sync: STD_LOGIC;
-  signal prog_sync: STD_LOGIC;
-  signal expired: STD_LOGIC;
-  signal reset_sync: STD_LOGIC;
+  signal wr: STD_LOGIC := '0';
+  signal sensor_sync: STD_LOGIC := '0';
+  signal prog_sync: STD_LOGIC := '0';
+  signal expired: STD_LOGIC := '0';
+  signal reset_sync: STD_LOGIC := '0';
   signal clk: STD_LOGIC;
   signal leds: STD_LOGIC_VECTOR (6 downto 0) := "1000010";
   signal interval: STD_LOGIC_VECTOR (1 downto 0) := "00";
