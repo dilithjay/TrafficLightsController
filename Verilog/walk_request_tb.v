@@ -35,7 +35,11 @@ module walk_request_tb;
     initial begin
         wr_sync = 0;
         wr_reset = 0;
-        #10 
+        #5
+        wr_reset = 1;
+        #5
+        wr_reset = 0;
+        #20
         wr_sync = 1;
         #10
         wr_sync = 0;
