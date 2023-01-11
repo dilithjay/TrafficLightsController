@@ -33,7 +33,7 @@ module fsm(
     output reg wr_reset
     );
     
-    parameter A=0, B=1, C=2, D=3, E=4, F=5;
+    parameter A=0, B=1, C=2, D=3, E=4, F=5, G=6;
     reg [2:0] state = A;
     
     always@(posedge clk) begin
@@ -85,21 +85,34 @@ module fsm(
                     end
                     
                     E: begin
-                       leds = 7'b0010100;
-                       interval = 2'b10;
-                       state = F;
+                        if (sensor_sync) begin
+                            leds = 7'b0011000;
+                            interval = 2'b01;
+                            state = F;
+                        end
+                        else begin
+                            leds = 7'b0010100;
+                            interval = 2'b10;
+                            state = G;
+                        end
                     end
                     
                     F: begin
-                       leds = 7'b1000010;
-                       interval = 2'b00;
-                       state = A;
+                        leds = 7'b0010100;
+                        interval = 2'b10;
+                        state = G;
+                    end
+                    
+                    G: begin
+                        leds = 7'b1000010;
+                        interval = 2'b00;
+                        state = A;
                     end
                     
                     default: begin
-                       leds = 7'b1000010;
-                       interval = 2'b00;
-                       state = A;
+                        leds = 7'b1000010;
+                        interval = 2'b00;
+                        state = A;
                     end
                 endcase
                 start_t = 1;

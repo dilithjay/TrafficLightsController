@@ -49,13 +49,13 @@ module synchronizer_tb;
         sensor = 0;
         walk = 0;
         reprogram = 0;
-        #15
+        #17
         reset = 1;
-        #3
+        #2
         sensor = 1;
-        #3
+        #2
         walk = 1;
-        #3
+        #2
         reprogram = 1;
     end
     

@@ -30,32 +30,36 @@ module timer(
     );
     
     reg [3:0] count = 0;
-    reg change = 1;
-    reg restart_timer = 0;
+    reg change = 0;
+    reg is_reset = 0;
+    reg restart_timer = 1;
     reg enable_checked = 0;
     
     always@(posedge clk) begin
     
         if (reset_sync | start_t) begin
-            if (!restart_timer) begin
+            if (restart_timer) begin
                 change = 0;
-                restart_timer = 1;
+                restart_timer = 0;
                 count = 1;
                 expired = 0;
                 enable_checked = 0;
             end
+            if (reset_sync) is_reset = 1;
         end
         else begin
-            restart_timer = 0;        
+            restart_timer = 1;
+                    
             if (!change) begin
-                count = tp_val + 1;
+                count = tp_val - is_reset;
                 change = 1;
+                is_reset = 0;
             end
             
             expired = 0;
             if (enable) begin
                 if (!enable_checked) begin
-                    if (count == 1) begin
+                    if (count == 0 & change) begin
                         expired = 1;
                     end
                     if (count > 0) begin

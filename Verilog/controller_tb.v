@@ -58,7 +58,7 @@ module controller_tb;
         walk = 1;
         #50
         walk = 0;
-        #200
+        #1000
         sensor = 1;
     end
     

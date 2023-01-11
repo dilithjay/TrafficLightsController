@@ -33,7 +33,7 @@ module divider(
         if (reset_sync) begin
             count = 1;
             temp = 0;
-            enable = 0;
+            enable = 1;
         end
         else begin
             if (count == 50_000_000) begin
